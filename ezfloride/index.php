@@ -145,7 +145,7 @@
             <!--==================== POPULAR ====================-->
             <section class="popular section" id="popular">
         <h2 class="section__title">
-            Choose Your Electric Car <br> Of The Porsche Brand
+            Choose Your Car <br> Of The Toyota Brand
         </h2>
 
         <div class="popular__container container swiper">
@@ -164,7 +164,7 @@
                     <div class="shape shape__smaller"></div>
 
                     <h1 class="popular__title"><?=$row["product_name"]?></h1>
-                    <h3 class="popular__subtitle"><?=$row["category_name"]?></h3>
+                    <!-- <h3 class="popular__subtitle"><?=$row["category_name"]?></h3> -->
 
 
                     <img src="<?=$row["product_image"]?>" alt="" class="popular__img">
@@ -231,112 +231,81 @@
 
             <!--==================== FEATURED ====================-->
             <section class="featured section" id="featured">
-                <h2 class="section__title">
-                    Featured Luxury Cars
-                </h2>
+    <h2 class="section__title">
+        Our Fleet
+    </h2>
 
-                <div class="featured__container container">
-                    <ul class="featured__filters">
-                        <li>
-                            <button class="featured__item active-featured" data-filter="all">
-                                <span>All</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="featured__item" data-filter=".tesla">
-                                <img src="assets/img/logo3.png" alt="">
-                            </button>
-                        </li>
-                        <li>
-                            <button class="featured__item" data-filter=".audi">
-                                <img src="assets/img/logo2.png" alt="">
-                            </button>
-                        </li>
-                        <li>
-                            <button class="featured__item" data-filter=".porsche">
-                                <img src="assets/img/logo1.png" alt="">
-                            </button>
-                        </li>
-                    </ul>
+    <div class="featured__container container">
+        <ul class="featured__filters">
+            <li>
+                <button class="featured__item active-featured" data-filter="all">
+                    <span>All</span>
+                </button>
+            </li>
+            <?php
+           
+            include_once "./config/dbconnect.php";
+            $sql="SELECT * from category";
+            $result=$conn-> query($sql);
+            if ($result-> num_rows > 0){
+                while ($row=$result-> fetch_assoc()) {
+                    $category_id = $row['category_id'];
+                    $category_name = $row['category_name'];
+            ?>
+            <li>
+                <button class="featured__item" data-filter=".<?php echo $category_name; ?>">
+                    <span><?php echo $category_name; ?></span>
+                </button>
+            </li>
+            <?php
+                }
+            }
+            ?>
+        </ul>
 
-                    <div class="featured__content grid">
-                        <article class="featured__card mix tesla">
-                            <div class="shape shape__smaller"></div>
+        <div class="featured__content grid">
+            <?php
+            $sql="SELECT * from product, category WHERE product.category_id=category.category_id";
+            $result=$conn-> query($sql);
+            if ($result-> num_rows > 0){
+                while ($row=$result-> fetch_assoc()) {
+            ?>
+            <article class="featured__card mix <?php echo $row["category_name"]; ?>">
+                <div class="shape shape__smaller"></div>
 
-                            <h1 class="featured__title">Tesla</h1>
-                            <h3 class="featured__subtitle">Model X</h3>
+                <h1 class="featured__title"><?php echo $row["product_name"]; ?></h1>
+                <!-- <h3 class="featured__subtitle"><?php echo $row["category_name"]; ?></h3> -->
 
-                            <img src="assets/img/featured1.png" alt="" class="featured__img">
+                <img src="<?php echo $row["product_image"]; ?>" alt="" class="featured__img">
 
-                            <h3 class="featured__price">$98,900</h3>
-
-                            <button class="button featured__button">
-                                <i class="ri-shopping-bag-2-line"></i>
-                            </button>
-                        </article>
-
-                        <article class="featured__card mix tesla">
-                            <div class="shape shape__smaller"></div>
-
-                            <h1 class="featured__title">Tesla</h1>
-                            <h3 class="featured__subtitle">Model 3</h3>
-
-                            <img src="assets/img/featured2.png" alt="" class="featured__img">
-
-                            <h3 class="featured__price">$45,900</h3>
-
-                            <button class="button featured__button">
-                                <i class="ri-shopping-bag-2-line"></i>
-                            </button>
-                        </article>
-                 
-                        <article class="featured__card mix audi">
-                            <div class="shape shape__smaller"></div>
-
-                            <h1 class="featured__title">Audi</h1>
-                            <h3 class="featured__subtitle">E-tron</h3>
-
-                            <img src="assets/img/featured3.png" alt="" class="featured__img">
-
-                            <h3 class="featured__price">$175,900</h3>
-
-                            <button class="button featured__button">
-                                <i class="ri-shopping-bag-2-line"></i>
-                            </button>
-                        </article>
-
-                        <article class="featured__card mix porsche">
-                            <div class="shape shape__smaller"></div>
-
-                            <h1 class="featured__title">Porsche</h1>
-                            <h3 class="featured__subtitle">Boxster 987</h3>
-
-                            <img src="assets/img/featured4.png" alt="" class="featured__img">
-
-                            <h3 class="featured__price">$126,900</h3>
-
-                            <button class="button featured__button">
-                                <i class="ri-shopping-bag-2-line"></i>
-                            </button>
-                        </article>
-
-                        <article class="featured__card mix porsche">
-                            <div class="shape shape__smaller"></div>
-
-                            <h1 class="featured__title">Porsche</h1>
-                            <h3 class="featured__subtitle">Panamera</h3>
-
-                            <img src="assets/img/featured5.png" alt="" class="featured__img">
-
-                            <h3 class="featured__price">$126,900</h3>
-
-                            <button class="button featured__button">
-                                <i class="ri-shopping-bag-2-line"></i>
-                            </button>
-                        </article>
+                <div class="popular__data">
+                        <div class="popular__data-group">
+                        <i class="ri-funds-box-line"></i> $<?= number_format($row["price"]) ?>
+                       
+                        </div>
+                        <div class="popular__data-group">
+                            <i class="ri-dashboard-3-line"></i> <?=$row["price"]?> mi
+                        </div>
+                        <div class="popular__data-group">
+                            <i class="ri-charging-pile-2-line"></i> Electric
+                        </div>
                     </div>
-                </div>
-            </section>
+
+                <h3 class="featured__price">$<?php echo number_format($row["price"]); ?></h3>
+
+
+                <button class="button featured__button">
+                    <i class="ri-shopping-bag-2-line"></i>
+                </button>
+            </article>
+            <?php
+                }
+            }
+            ?>
+        </div>
+    </div>
+</section>
+
 
             <!--==================== OFFER ====================-->
             <section class="offer section">
@@ -396,10 +365,10 @@
             <div class="footer__container container grid">
                 <div class="footer__content">
                     <a href="#" class="footer__logo">
-                        <i class="ri-steering-line"></i> Elecar
+                        <i class="ri-steering-line"></i> EzFloRide
                     </a>
                     <p class="footer__description">
-                        We offer the best electric cars of <br> 
+                        We offer the best cars of <br> 
                         the most recognized brands in <br> 
                         the world.
                     </p>
@@ -415,7 +384,7 @@
                             <a href="#" class="footer__link">About</a>    
                         </li>
                         <li>
-                            <a href="#" class="footer__link">Cars</a>
+                            <a href="#featured" class="footer__link">Cars</a>
                         </li>
                         <li>
                             <a href="#" class="footer__link">History</a>
@@ -435,15 +404,11 @@
                         <li>
                             <a href="#" class="footer__link">Request a quote</a>
                         </li>
-                        <li>
-                            <a href="#" class="footer__link">Find a dealer</a>
-                        </li>
+                       
                         <li>
                             <a href="#" class="footer__link">Contact us</a>
                         </li>
-                        <li>
-                            <a href="#" class="footer__link">Services</a>
-                        </li>
+                        
                     </ul>
                 </div>
 
@@ -456,18 +421,18 @@
                         <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
                             <i class="ri-facebook-fill"></i>
                         </a>
-                        <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <a href="https://www.instagram.com/ezfloride?igsh=YnY0ZnkzNXJzZ2Y4" target="_blank" class="footer__social-link">
                             <i class="ri-instagram-line"></i>
                         </a>
-                        <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <!-- <a href="https://twitter.com/" target="_blank" class="footer__social-link">
                             <i class="ri-twitter-line"></i>
-                        </a>
+                        </a> -->
                     </ul>
                 </div>
             </div>
 
             <span class="footer__copy">
-                &#169; Bedimcode. All rigths reserved
+                &#169; EzFloRide. All rigths reserved
             </span>
         </footer>
 
