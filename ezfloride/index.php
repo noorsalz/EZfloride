@@ -171,14 +171,14 @@
 
                     <div class="popular__data">
                         <div class="popular__data-group">
-                            <i class="ri-dashboard-3-line"></i> <?=$row["price"]?>
+                            <i class="ri-price-tag-3-line"></i> <?=$row["price"]?>
                         </div>
                         <div class="popular__data-group">
                             <i class="ri-funds-box-line"></i> <?=$row["some_other_field"]?>
                         </div>
-                        <div class="popular__data-group">
+                        <!-- <div class="popular__data-group">
                             <i class="ri-charging-pile-2-line"></i> Electric
-                        </div>
+                        </div> -->
                     </div>
 
                     <h3 class="popular__price"><?=$row["price"]?></h3>
@@ -280,15 +280,15 @@
 
                 <div class="popular__data">
                         <div class="popular__data-group">
-                        <i class="ri-funds-box-line"></i> $<?= number_format($row["price"]) ?>
+                        <i class="ri-price-tag-3-line"></i> $<?= number_format($row["price"]) ?>
                        
                         </div>
                         <div class="popular__data-group">
                             <i class="ri-dashboard-3-line"></i> <?=$row["price"]?> mi
                         </div>
-                        <div class="popular__data-group">
+                       <!--  <div class="popular__data-group">
                             <i class="ri-charging-pile-2-line"></i> Electric
-                        </div>
+                        </div> -->
                     </div>
 
                 <h3 class="featured__price">$<?php echo number_format($row["price"]); ?></h3>
@@ -333,7 +333,7 @@
             </section>
 
             <!--==================== LOGOS ====================-->
-            <section class="logos section">
+           <!--  <section class="logos section">
                 <div class="logos__container container grid">
                     <div class="logos__content">
                         <img src="assets/img/logo1.png" alt="" class="logos__img">
@@ -354,7 +354,7 @@
                         <img src="assets/img/logo6.png" alt="" class="logos__img">
                     </div>
                 </div>
-            </section>
+            </section> -->
         </main>
 
         <!--==================== FOOTER ====================-->
@@ -381,7 +381,7 @@
 
                     <ul class="footer__links">
                         <li>
-                            <a href="#" class="footer__link">About</a>    
+                            <a href="#about" class="footer__link">About</a>    
                         </li>
                         <li>
                             <a href="#featured" class="footer__link">Cars</a>
@@ -389,9 +389,9 @@
                         <li>
                             <a href="#" class="footer__link">History</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#" class="footer__link">Shop</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
 
